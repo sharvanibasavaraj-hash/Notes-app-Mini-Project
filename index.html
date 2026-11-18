@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notely | Your personal notes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN AND REGISTER -->
+<div id="authPage" class="auth-page">
+    <div class="auth-left">
+        <div class="logo">✦ notely<span>.</span></div>
+        <div class="auth-message">
+            <p>YOUR PERSONAL CREATIVE SPACE</p>
+            <h1>Your thoughts<br>deserve a <i>home.</i></h1>
+            <p>Save ideas, organise your day and keep every important thought in one beautiful place.</p>
+        </div>
+        <div class="decoration">✧</div>
+    </div>
+
+    <div class="auth-right">
+        <div class="auth-box">
+            <div class="auth-tabs">
+                <button class="active" id="loginTab">Log in</button>
+                <button id="registerTab">Create account</button>
+            </div>
+
+            <div id="loginBox">
+                <p class="eyebrow">WELCOME BACK</p>
+                <h2>Good to see you.</h2>
+                <p class="subtext">Log in to your personal space.</p>
+
+                <form id="loginForm">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="you@example.com" required>
+
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Your password" required>
+
+                    <button class="primary-btn full-btn">Log in →</button>
+                </form>
+            </div>
+
+            <div id="registerBox" class="hidden">
+                <p class="eyebrow">GET STARTED</p>
+                <h2>Create your account.</h2>
+                <p class="subtext">Your ideas need a place to live.</p>
+
+                <form id="registerForm">
+                    <label>Name</label>
+                    <input type="text" id="registerName" placeholder="Your name" required>
+
+                    <label>Email</label>
+                    <input type="email" id="registerEmail" placeholder="you@example.com" required>
+
+                    <label>Password</label>
+                    <input type="password" id="registerPassword" placeholder="At least 8 characters" minlength="8" required>
+
+                    <button class="primary-btn full-btn">Create account →</button>
+                </form>
+            </div>
+
+            <p id="authMessage"></p>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN APPLICATION -->
+<div id="appPage" class="app hidden">
+
+    <aside class="sidebar">
+        <div class="logo">✦ notely<span>.</span></div>
+
+        <p class="side-heading">WORKSPACE</p>
+
+        <button class="nav active" data-page="home">⌂ <span>Overview</span></button>
+        <button class="nav" data-page="all">▤ <span>All Notes</span></button>
+        <button class="nav" data-page="favourites">♡ <span>Favourites</span></button>
+        <button class="nav" data-page="private">♙ <span>Private Notes</span></button>
+        <button class="nav" data-page="trash">▱ <span>Trash</span></button>
+
+        <div class="sidebar-bottom">
+            <button class="nav" id="themeButton">◐ <span>Toggle Theme</span></button>
+            <div class="profile">
+                <div class="avatar" id="avatar">N</div>
+                <div class="profile-info">
+                    <strong id="profileName">User</strong>
+                    <small id="profileEmail"></small>
+                </div>
+                <button id="logoutButton" title="Log out">↗</button>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <span>Workspace</span> / <strong id="pageTitle">Overview</strong>
+            </div>
+            <button class="primary-btn" id="topAddButton">＋ New Note</button>
+        </header>
+
+        <!-- OVERVIEW -->
+        <section class="content-page active" id="homePage">
+            <div class="hero">
+                <div>
+                    <p class="eyebrow">A LITTLE SPACE FOR BIG IDEAS</p>
+                    <h1>Make room for<br><i>your thoughts.</i></h1>
+                    <p>Every idea starts somewhere. Let yours start here.</p>
+                    <button class="primary-btn" id="heroAddButton">＋ Create a note</button>
+                </div>
+                <div class="hero-art">
+                    <div class="circle"></div>
+                    <div class="paper">
+                        <span>✦</span>
+                        <h3>Ideas live here.</h3>
+                        <small>dream · plan · create</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <span>▤</span>
+                    <p>Total Notes</p>
+                    <h2 id="totalCount">0</h2>
+                </div>
+                <div class="stat">
+                    <span>♡</span>
+                    <p>Favourites</p>
+                    <h2 id="favouriteCount">0</h2>
+                </div>
+                <div class="stat">
+                    <span>✦</span>
+                    <p>Pinned Notes</p>
+                    <h2 id="pinnedCount">0</h2>
+                </div>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">YOUR COLLECTION</p>
+                    <h2>Recently updated</h2>
+                </div>
+                <button class="text-button" data-goto="all">View all →</button>
+            </div>
+
+            <div class="notes-grid" id="recentNotes"></div>
+        </section>
+
+        <!-- ALL NOTES -->
+        <section class="content-page" id="allPage">
+            <div class="page-heading">
+                <div>
+                    <p class="eyebrow">YOUR COLLECTION</p>
+                    <h1>All your <i>notes.</i></h1>
+                    <p>Everything you want to remember.</p>
+                </div>
+                <button class="primary-btn" id="allAddButton">＋ New Note</button>
+            </div>
+
+            <div class="toolbar">
+                <input type="search" id="searchInput" placeholder="⌕ Search your notes...">
+                <select id="sortSelect">
+                    <option value="recent">Recently updated</option>
+                    <option value="oldest">Oldest first</option>
+                    <option value="az">Title A-Z</option>
+                </select>
+            </div>
+
+            <div class="notes-grid" id="allNotes"></div>
+        </section>
+
+        <!-- FAVOURITES -->
+        <section class="content-page" id="favouritesPage">
+            <div class="page-heading">
+                <div>
+                    <p class="eyebrow">SAVED WITH LOVE</p>
+                    <h1>Your <i>favourites.</i></h1>
+                    <p>Keep your important notes close.</p>
+                </div>
+            </div>
+            <div class="notes-grid" id="favouriteNotes"></div>
+        </section>
+
+        <!-- PRIVATE -->
+        <section class="content-page" id="privatePage">
+            <div class="page-heading">
+                <div>
+                    <p class="eyebrow">JUST FOR YOU</p>
+                    <h1>Your private <i>space.</i></h1>
+                    <p>Your personal thoughts, protected by your account.</p>
+                </div>
+                <button class="primary-btn" id="privateAddButton">＋ Private Note</button>
+            </div>
+
+            <div class="privacy-banner">🔒 Your private notes are visible only to your account.</div>
+            <div class="notes-grid" id="privateNotes"></div>
+        </section>
+
+        <!-- TRASH -->
+        <section class="content-page" id="trashPage">
+            <div class="page-heading">
+                <div>
+                    <p class="eyebrow">A SECOND CHANCE</p>
+                    <h1>Your <i>trash.</i></h1>
+                    <p>Restore or permanently delete notes.</p>
+                </div>
+            </div>
+            <div class="notes-grid" id="trashNotes"></div>
+        </section>
+
+    </main>
+</div>
+
+<!-- NOTE EDITOR -->
+<div class="modal" id="noteModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div>
+                <p class="eyebrow">A FRESH PAGE</p>
+                <h2 id="modalTitle">Create a note</h2>
+            </div>
+            <button id="closeModal" class="close-button">×</button>
+        </div>
+
+        <form id="noteForm">
+            <input id="noteTitle" class="note-title-input" placeholder="Give your note a title..." required maxlength="200">
+
+            <textarea id="noteContent" placeholder="Start writing something wonderful..." required></textarea>
+
+            <div class="note-options">
+                <select id="noteCategory">
+                    <option>Personal</option>
+                    <option>Study</option>
+                    <option>Work</option>
+                    <option>Ideas</option>
+                    <option>Other</option>
+                </select>
+
+                <label><input type="checkbox" id="privateCheck"> Private</label>
+                <label><input type="checkbox" id="pinCheck"> Pin</label>
+                <label><input type="checkbox" id="favouriteCheck"> Favourite</label>
+            </div>
+
+            <div class="modal-buttons">
+                <button type="button" class="secondary-btn" id="cancelModal">Cancel</button>
+                <button type="submit" class="primary-btn">Save Note →</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
